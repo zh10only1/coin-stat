@@ -1,10 +1,21 @@
 const express = require('express');
+const dbConnect = require('./database/connection');
+const router = require('./routes/index')
+const {PORT} = require('./config/environment');
+const errorHandler = require('./middleware/errorHandler')
+const cookieParser = require('cookie-parser');
+
 const app = express();
-const PORT = 3000;
+app.use(cookieParser());
+app.use(express.json());
+app.use(router);
 
-app.get('/', (req, res) => res.json({msg: 'Hello Program!!!'}))
+dbConnect();
 
-app.listen(PORT,console.log(`Backend is running on Port: ${PORT}`))
+app.use('/storage', express.static('storage'));
+
+app.use(errorHandler);
+app.listen(PORT,console.log(`Backend is running on Port: ${PORT}`));
 
 
 
