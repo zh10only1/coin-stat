@@ -1,0 +1,16 @@
+.loaderWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    background-color: #141B41;
+    border-radius: 10px;
+}
+
+.loaderWrapper > h2 {
+    background-color: transparent;
+    color: white;
+    font-weight: 400;
+}

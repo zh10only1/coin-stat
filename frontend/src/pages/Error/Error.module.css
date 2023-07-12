@@ -1,0 +1,32 @@
+.error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: rgb(234, 234, 234);
+}
+
+.error > h1 {
+    font-size: 100px;
+    background-color: rgb(234, 234, 234);
+}
+
+.error > h4 {
+    font-size: 30px;
+    background-color: rgb(234, 234, 234);
+}
+
+.error > div > p {
+    color: black;
+    background-color: rgb(234, 234, 234);
+}
+
+.error > div {
+    margin-bottom: 10px;
+    background-color: rgb(234, 234, 234);
+}
+
+.background {
+    background-color: rgb(234, 234, 234);
+}

@@ -1,6 +1,7 @@
 const Joi = require('joi');
 const fs = require('fs');
 const Blog = require('../models/blog');
+const BlogDetailsDTO = require("../dto/blog-details");
 const Comment = require('../models/comment');
 const {BACKEND_SERVER_PATH} = require('../config/environment');
 const BlogDTO = require('../dto/blog');
@@ -83,12 +84,12 @@ const blogController = {
         let blog;
 
         try {
-            blog = await Blog.findById(req.params.id);
+            blog = await Blog.findById(req.params.id).populate("author");
         } catch (error) {
             return next(error);
         }
 
-        const blogDto = new BlogDTO(blog);
+        const blogDto = new BlogDetailsDTO(blog);
 
         return res.status(200).json({blog: blogDto});
     },
@@ -126,7 +127,6 @@ const blogController = {
             return res.status(200).json({message: 'Blog Updated'});
         }
 
-
         let previousPhotoPath = blog.photoPath;
         previousPhotoPath = previousPhotoPath.split('/').at(-1);
         fs.unlinkSync(`storage/${previousPhotoPath}`);
@@ -140,7 +140,11 @@ const blogController = {
             return next(error);
         }
 
-        await Blog.findByIdAndUpdate(blogId,{title, content, photoPath:`${BACKEND_SERVER_PATH}/storage/${imagePath}`});
+        try {
+            await Blog.findByIdAndUpdate(blogId,{title, content, photoPath:`${BACKEND_SERVER_PATH}/storage/${imagePath}`});
+        } catch (error) {
+            return next(error);
+        }
 
         return res.status(200).json({message: 'Blog Updated'});
     },

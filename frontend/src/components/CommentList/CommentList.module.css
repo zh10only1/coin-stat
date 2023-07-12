@@ -1,0 +1,21 @@
+.commentListContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.noComments {
+    color: #5465FF;
+    font-weight: 400;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.commentList {
+    height: 85vh;
+    overflow-y: auto;
+}
